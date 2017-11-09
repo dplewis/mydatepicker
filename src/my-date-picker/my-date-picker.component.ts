@@ -358,6 +358,14 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
                 this.emitDateChanged(this.selectedDate);
             }
         }
+        else if (value === undefined) {
+            if (!this.opts.inline) {
+                this.updateDateValue(null);
+            }
+            else {
+                this.emitDateChanged(null);
+            }
+        }
         else if (value === null || value === "") {
             if (!this.opts.inline) {
                 this.updateDateValue({year: 0, month: 0, day: 0});
@@ -639,7 +647,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
         }
     }
 
-    updateDateValue(date: IMyDate): void {
+    updateDateValue(date: IMyDate | null): void {
         let clear: boolean = !this.utilService.isInitializedDate(date);
 
         this.selectedDate = date;
@@ -652,7 +660,7 @@ export class MyDatePicker implements OnChanges, ControlValueAccessor {
         }
     }
 
-    emitDateChanged(date: IMyDate): void {
+    emitDateChanged(date: IMyDate | null): void {
         if (this.utilService.isInitializedDate(date)) {
             let dateModel: IMyDateModel = this.getDateModel(date);
             this.dateChanged.emit(dateModel);
