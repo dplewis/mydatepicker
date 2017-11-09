@@ -18,7 +18,7 @@ attribute directive date picker.
 
 To install this component to an external project, follow the procedure:
 
-1. __npm install mydatepicker --save__
+1. __npm install angular4-datepicker --save__
 
 2. Add __MyDatePickerModule__ import to your __@NgModule__ like example below
     ```ts
