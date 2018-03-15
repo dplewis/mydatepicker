@@ -83,3 +83,57 @@ Cuppalab Multi select custom multiselect -
 https://theinfogrid.com/tech/developers/angular/augury-debug-profile-angular-app/amp/
 
 
+
+################################################################################
+
+Regular expression creator -- https://jsfiddle.net/afh2p613/26/
+
+
+var d = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(^.{1,15}$)";
+
+const pattern =  new RegExp(d);
+
+function passwordStrengthCheck(value, config){
+        if (!config) {
+            return null;
+        } else {
+
+            let ergex = '';
+
+            if (config.isContainsLowercase) {
+                ergex += '(?=.*[a-z])';
+            }
+            if (config.isContainsNumeric) {
+                ergex += '(?=.*[A-Z])';
+            }
+            if (config.isContainsSpecialCharacter) {
+                ergex += '(?=.*[0-9])';
+            }
+            if (config.isContainsUppercase) {
+                ergex += '(?=.*[!@#\$%\^&\*])';
+            }
+            
+            // Check password length
+             ergex += '(^.{' + (config.passwordMinLength || 5) + ',' + (config.passwordMaxLength || 20) + '}$)';
+
+            const pattern = new RegExp(ergex);
+            
+            alert(ergex);
+
+            return pattern.test(value);
+            
+        }
+}
+
+var config = {
+  isContainsLowercase: true,
+  isContainsNumeric: true,
+  isContainsSpecialCharacter: true,
+  isContainsUppercase: true
+};
+        
+alert(passwordStrengthCheck('jkjA###defdgfg2@#3', config))
+
+
+
+
