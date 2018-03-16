@@ -55,26 +55,37 @@ https://www.grammarly.com/?q=brand&utm_source=google&utm_medium=cpc&utm_campaign
 
 
 
-################################################################################################################
+##########################################
 Cuppalab Multi select custom multiselect -
-###########################################
+##########################################
+
+
+/* Cuppalab .multiselect css */
 
 .custom-class-example {
-    color: green;
-}
-.custom-class-example .c-token{
-    background: red !important;
-}
-.custom-class-example .pure-checkbox label::before {
-    border-color: transparent !important;
-}
-.custom-class-example .pure-checkbox input[type="checkbox"]:checked + label[_ngcontent-c1]:before {
-    background: transparent !important;
-}
-.custom-class-example .pure-checkbox input[type="checkbox"]:checked + label[_ngcontent-c1]:after {
-    border-color: gray !important;
+    color: #004f93;
 }
 
+.custom-class-example .c-token {
+    background: #004f93 !important;
+}
+
+.custom-class-example .pure-checkbox label::before {
+    border-color: transparent !important;
+    background: transparent !important;
+}
+
+.custom-class-example .pure-checkbox label::after {
+    border-color: #004f93 !important;
+}
+
+.custom-class-example .pure-checkbox input[type="checkbox"]:checked+label[_ngcontent-c1]::before {
+    background: transparent !important;
+}
+
+.custom-class-example .pure-checkbox input[type="checkbox"]:checked+label[_ngcontent-c1]::after {
+    border-color: gray !important;
+}
 
 
 ###################
