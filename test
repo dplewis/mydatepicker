@@ -146,5 +146,140 @@ var config = {
 alert(passwordStrengthCheck('jkjA###defdgfg2@#3', config))
 
 
+***********************************************************************************************
+Detect changes betwwen two JSON's - 
+
+http://jsfiddle.net/cf5ddod1/55/
+
+
+<pre id="console"></pre>
+
+
+
+html, body{
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+#console {
+    background: black;
+    color: green;
+    height: 90%;
+    display: block;
+    padding: 20px;
+    margin: 0px;
+    overflow: scroll;
+}
+
+
+________________________________
+function log(msg, indent){indent = (typeof indent == 'undefined' ? 0 : indent);for(var i = 0; i<indent; i++){msg = '  '+msg;}$("#console").append(msg+'\n');}
+function dump(obj){log(JSON.stringify(obj));}
+function debug(msg, indent){
+//    log(msg, indent);
+}
+
+
+/*
+http://stackoverflow.com/questions/31295545/how-to-get-only-the-changed-values-from-two-json-objects
+
+    We are comparing two objects: a and b.
+    Object b is newer and similar to a.
+    We are looking for changes from a to b.
+    We assume that data types haven't changed (String to Number).
+    We assume that parent is either an Array or an Object.
+    
+    This is the "easier on the programmer, harder on the computer" method.
+    It's very inefficient. Worst case is something like O(n^n).
+    But this works, is easier to understand that the "correct"
+     implementation, and entertained me for a bit.
+*/
+
+
+var a = [{"name":"node1","id":1,"is_open":true,"children":
+    [
+      {"name":"child1","id":2},
+      {"name":"child2","id":3}
+    ]
+}];
+
+var b = [{"name":"node1","id":1,"is_open":false,"children":
+    [
+      {"name":"child1","id":2},
+      {"name":"child2","id":3}
+    ]
+}];
+
+
+
+
+// var diff should be inside getDiff(), 
+// but then we couldn't show it working
+var diff;
+function getDiff(a, b){
+    diff = (isArray(a) ? [] : {});
+    recursiveDiff(a, b, diff);
+    return diff;
+}
+
+function recursiveDiff(a, b, node){
+    dump(diff);
+    var checked = [];
+    
+    for(var prop in a){
+        debug(prop, 1);
+        if(typeof b[prop] == 'undefined'){
+            addNode(prop, '[[removed]]', node);
+        }
+        else if(JSON.stringify(a[prop]) != JSON.stringify(b[prop])){
+            debug(typeof b[prop], 2);
+            // if value
+            if(typeof b[prop] != 'object' || b[prop] == null){
+                addNode(prop, b[prop], node);
+                debug("(added)", 3);
+            }
+            else {
+                // if array
+                if(isArray(b[prop])){
+                   addNode(prop, [], node);
+                   recursiveDiff(a[prop], b[prop], node[prop]);
+                }
+                // if object
+                else {
+                    addNode(prop, {}, node);
+                    recursiveDiff(a[prop], b[prop], node[prop]);
+                }
+            }
+        }
+    }
+}
+
+function addNode(prop, value, parent){
+        parent[prop] = value;
+}
+
+function isArray(obj){
+    return (Object.prototype.toString.call(obj) === '[object Array]');
+}
+
+
+log('Input:');
+dump(a);
+dump(b);
+log('');
+log('Progress:');
+var result = getDiff(a, b);
+log('\n============================\n');
+log('Result:');
+dump(result);
+
+---------------------
+
+
+
+
+
+
 
 
