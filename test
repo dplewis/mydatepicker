@@ -300,5 +300,6 @@ function isDateRangeWithinRange1(firstDateRange, secondDateRange) {
 }
 
 
-
+[8/9, 11:26 PM] AMOL BORSE: (<[^>]+\s+)(?:style\s*=\s*"(?!(?:|[^"]*[;\s])font-size\s*:[^";]*)[^"]*"|(style\s*=\s*")(?=(?:|[^"]*)(;))?(?=(?:|[^"]*[;\s])(font-size\s*:[^";]*))?[^"]*("))
+[8/9, 11:35 PM] AMOL BORSE: (?:style\s*=\s*,"(?!(?:|[^"]*[;\s])font-size\s*:[^";]*)[^"]*"|(style\s*=\s*")(?=(?:|[^"]*)(;))?(?=(?:|[^"]*[;\s])(font-size\s*:[^";]*))?[^"]*)
 
