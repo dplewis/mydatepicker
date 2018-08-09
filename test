@@ -278,7 +278,26 @@ dump(result);
 
 
 
+function isDateRangeWithinRange1(firstDateRange, secondDateRange) {
 
+    if (!(firstDateRange.from && firstDateRange.to && secondDateRange.from && secondDateRange.to)) {
+        console.log('Please provide non empty date ranges.');
+        return false;
+    }
+    const e1start = moment(firstDateRange.from).startOf('day').valueOf();
+    const e1end = moment(firstDateRange.to).startOf('day').valueOf();
+    const e2start = moment(secondDateRange.from).startOf('day').valueOf();
+    const e2end = moment(secondDateRange.to).startOf('day').valueOf();
+
+    if (e1start > e1end || e2start > e2end) {
+        const message = e1start > e1end ? 'First ' : 'Second' + 'date range is invalid.';
+        console.log(message);
+        return;
+    }
+    console.log('e1start ##1 ', e1start, 'e2start ##2 ', e2start , ' e1end ##3 ', e1end, 'e2end ##4 ', e2end);
+    //return (e1start > e2start && e1start < e2end || e2start > e1start && e2start < e1end);
+   return (e1start < e2start && e1end > e2end);
+}
 
 
 
